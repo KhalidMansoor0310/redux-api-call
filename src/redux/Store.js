@@ -3,6 +3,5 @@ import userReducers from './reducers/userReducers';
 export const store = configureStore({
   reducer: {
         user:userReducers
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  }
 })
