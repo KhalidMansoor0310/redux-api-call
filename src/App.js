@@ -1,23 +1,23 @@
+import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './App.css';
-import Header from './components/Header';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
-import ProductListing from './components/ProductListing';
-import ProductDetails from './components/ProductDetails';
-import ProductComponent from './components/ProductComponent';
+import { addUser } from './redux/reducers/userReducers';
+
 function App() {
+  const users = useSelector((state)=>state.user.users);
+  const dispatch = useDispatch();
+  const inputref = useRef('');
+  const addNewUser = (e) =>{
+      e.preventDefault();
+      dispatch(addUser(inputref.current.value))
+  }
   return (
-    <Router>
-      <Header/>
-      <Routes>
-          <Route path='/productlisting' element={<ProductListing />} />
-          <Route path='/productdetail/:productId' element={<ProductDetails />} />
-          <Route path="/productComponent" element={<ProductComponent />} />
-      </Routes>
-    </Router>
+    <form onSubmit={addNewUser}>
+        <input type="text" ref={inputref} />  
+
+        <button type='submit'>Add user</button>
+    </form>
   );
 }
 
